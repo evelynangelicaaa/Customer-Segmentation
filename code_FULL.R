@@ -365,6 +365,7 @@ xgb_pred <- as.factor(xgb_pred)
 xgb.importance(model = xgb_model) %>%
   xgb.plot.importance(top_n = 10)
 
+xgb.plot.tree(model = xgb_model, trees = 0)  # menampilkan pohon pertama
 
 # Evaluasi Metrik ---------------------------------------------------------
 # Ensure the actual labels are factors
