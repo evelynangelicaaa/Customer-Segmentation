@@ -224,6 +224,17 @@ svm_model
 svm_pred <- predict(svm_model, newdata = test_features)
 confusionMatrix(svm_pred, test_label)
 
+prob <- attr(svm_pred, "probabilities")[, "1"]
+
+library(pROC)
+
+roc_obj <- roc(response = data_test$Loyalty_Label,
+               predictor = prob)
+
+# Tampilkan kurva dan AUC
+plot(roc_obj, main = "ROC Curve - SVM")
+auc(roc_obj)
+
 # If using a linear kernel, we can extract the coefficients
 if (svm_model$kernel == "linear") {
   # Get the coefficients
